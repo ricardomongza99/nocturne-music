@@ -1,6 +1,7 @@
 package com.equipo4.nocturnemusic.controller;
 
 import com.equipo4.nocturnemusic.model.Category;
+import com.equipo4.nocturnemusic.model.Product;
 import com.equipo4.nocturnemusic.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,13 +31,9 @@ public class CategoryController {
 
     @GetMapping("/edit/{id}")
     public String showEditCategoryForm(@PathVariable("id") Long id, Model model) {
-        Optional<Category> categoryOptional = categoryService.findById(id);
-        if (categoryOptional.isPresent()) {
-            model.addAttribute("category", categoryOptional.get());
-            return "category/form";
-        } else {
-            return "redirect:/categories?error=notfound";
-        }
+        Optional<Category> category = categoryService.findById(id);
+        category.ifPresent(c -> model.addAttribute("category", c));
+        return category.isPresent() ? "category/form" : "redirect:/categories";
     }
 
     @PostMapping
