@@ -1,4 +1,4 @@
-package com.equipo4.nocturnemusic.controller;
+package com.equipo4.nocturnemusic.controller.admin;
 
 import com.equipo4.nocturnemusic.model.Product;
 import com.equipo4.nocturnemusic.service.CategoryService;
