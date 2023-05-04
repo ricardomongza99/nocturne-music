@@ -1,5 +1,15 @@
 # nocturne-music
-An online shop for everything instrument related
+Nocturne Music Store is a web application for browsing and purchasing musical instruments and accessories. This project is built using Java with Spring Boot, Thymeleaf, and MySQL.
+
+## Features
+
+- Browse products by category
+- Search for products
+- View product details
+- Add products to shopping cart
+- Checkout and mock purchase process
+- User registration and authentication
+- Admin panel for managing products, categories, users, and deals
 
 ## MySQL Setup
 
