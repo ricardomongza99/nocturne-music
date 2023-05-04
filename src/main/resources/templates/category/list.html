@@ -11,7 +11,10 @@
 <header th:insert="fragments/header.html :: header"></header>
 
 <div class="container mt-3">
-    <a th:href="@{/categories/add}" type="button" class="btn btn-dark mb-3">Add Category</a>
+    <div class="d-flex justify-content-between">
+        <h3>Categories</h3>
+        <a th:href="@{/categories/add}" type="button" class="btn btn-dark mb-3">Add Category</a>
+    </div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
