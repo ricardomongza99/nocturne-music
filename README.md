@@ -24,7 +24,7 @@ Nocturne Music Store is a web application for browsing and purchasing musical in
 CREATE TABLE user
 (
     id       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255)            NOT NULL,
     password VARCHAR(255)        NOT NULL,
     email    VARCHAR(255) UNIQUE NOT NULL,
     enabled  BOOLEAN             NOT NULL DEFAULT 1,
@@ -72,7 +72,7 @@ CREATE TABLE shopping_cart_item
 7. (Optional) Run the following script to fill with mock data:
 ```mysql
 -- Insert mock data into 'user' table
-INSERT INTO user (username, password, email, enabled, is_admin)
+INSERT INTO user (name, password, email, enabled, is_admin)
 VALUES ('paul', '123456', 'paul@beatles.com', 1, 0),
        ('john', '123456', 'john@beatles.com', 1, 0),
        ('admin', '123456', 'admin@gmail.com', 1, 1);
