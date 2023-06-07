@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap');
+/* Color palette
+   • FFFDFD (White)
+   • 030B12 (Rich Black)
+   • B09F5C (Ecru)
+   • 2C6E49 (Dark Spring Green)
+   • B03043 (Cardinal)
+*/
+html {
+    font-family: 'Amiko', sans-serif;
+}
+
+.intitle {
+    height: fit-content;
+    margin: 5px auto;
+    width: fit-content;
+}
+
+    .intitle a {
+        text-decoration: none;
+    }
+
+    .intitle button {
+        background-color: #B09F5C;
+        border-width: 0;
+        border-radius: 5px;
+        color: white;
+        font-family: 'Amiko', sans-serif;
+        padding: 20px;
+    }
+
+        .intitle button:hover {
+            background-color: #CABF91;
+            cursor: pointer;
+        }
+
+    .intitle h1 {
+        font-size: 10vmin;
+        font-weight: 700;
+        text-align: center;
+    }
+
+.titlebox {
+    display: inline-block;
+    height: 100vh;
+    margin: none;
+    padding-top: 16%;
+    position: relative;
+    vertical-align: middle;
+    width: 100vw;
+}
