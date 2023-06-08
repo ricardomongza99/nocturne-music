@@ -23,6 +23,11 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.orElse(null);
     }
+    
+    public User findByUsername(String username) {
+        Optional<User> optionalUser = userRepository.findByName(username);
+        return optionalUser.orElse(null);
+    }
 
     public void save(User user) {
         userRepository.save(user);

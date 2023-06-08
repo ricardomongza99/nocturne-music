@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    Sign In
-</body>
+    <title>Sign In</title>
+  </head>
+  <body>
+    <h1>Sign In</h1>
+
+    <!-- Display error message if exists -->
+    <div th:if="${error}" style="color: red;">${error}</div>
+
+    <!-- Sign-in form -->
+    <form th:action="@{/login}" method="POST">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div>
+        <button type="submit">Sign In</button>
+      </div>
+    </form>
+  </body>
 </html>
