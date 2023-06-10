@@ -12,11 +12,13 @@ import com.equipo4.nocturnemusic.service.*;
 
 @Controller
 public class AppController {
+	private final CategoryService catService;
 	private final UserService userService;
 	
 	@Autowired
-	public AppController(UserService userService) {
-		this.userService = userService;
+	public AppController(CategoryService cs, UserService us) {
+		this.userService = us;
+		this.catService = cs;
 	}
     
     @RequestMapping("/")
@@ -25,7 +27,10 @@ public class AppController {
     }
 
     @RequestMapping("/home")
-	public String home(Model model) {
+	public String home(Model model, HttpSession session) {
+    	String user = (String)session.getAttribute("active_user");
+    	model.addAttribute("au_name", user);
+    	model.addAttribute("categories", catService.findAll());
 		return "home";
 	}
     
@@ -42,7 +47,7 @@ public class AppController {
     	User user = userService.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
-        	session.setAttribute("active_user", user.getId());
+        	session.setAttribute("active_user", user.getName());
             if (user.isAdmin()) {
                 return "redirect:/fork";
             } else {
