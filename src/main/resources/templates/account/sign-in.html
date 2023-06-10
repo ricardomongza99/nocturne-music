@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8">
-    <title>Sign In</title>
+    <link th:href="@{/styles/landpage.css}" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Nocturne Music</title>
   </head>
   <body>
-    <h1>Sign In</h1>
-
-    <!-- Display error message if exists -->
-    <div th:if="${error}" style="color: red;">${error}</div>
-
     <!-- Sign-in form -->
-    <form th:action="@{/login}" method="POST">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div>
-        <button type="submit">Sign In</button>
-      </div>
-    </form>
+    <div class="signin-form">
+      <h1>Sign In</h1>
+      <form th:action="@{/login}" method="POST">
+        <div class="input-field">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-field">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+          <button class="signin-button" type="submit">Sign In</button>
+        </div>
+        <div th:if="${error}" style="color: #B03043;"><p th:text="${error}"></p></div>
+      </form>
+    </div>
   </body>
 </html>

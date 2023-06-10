@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/admin/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
-
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping
+    @RequestMapping
     public String listProducts(Model model) {
         model.addAttribute("products", productService.findAll());
         return "product/list";
@@ -41,18 +40,18 @@ public class ProductController {
         Optional<Product> product = productService.findById(id);
         model.addAttribute("categories", categoryService.findAll());
         product.ifPresent(p -> model.addAttribute("product", p));
-        return product.isPresent() ? "product/form" : "redirect:/products";
+        return product.isPresent() ? "product/form" : "redirect:/admin/products";
     }
 
     @PostMapping
     public String saveProduct(Product product) {
         productService.save(product);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteById(id);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 }

@@ -1,5 +1,6 @@
 package com.equipo4.nocturnemusic.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,12 @@ import com.equipo4.nocturnemusic.service.*;
 
 @Controller
 public class AppController {
-	UserService userService = new UserService();
+	private final UserService userService;
+	
+	@Autowired
+	public AppController(UserService userService) {
+		this.userService = userService;
+	}
     
     @RequestMapping("/")
     public String landing() {
@@ -36,6 +42,7 @@ public class AppController {
     	User user = userService.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
+        	session.setAttribute("active_user", user.getId());
             if (user.isAdmin()) {
                 return "redirect:/fork";
             } else {
@@ -46,4 +53,9 @@ public class AppController {
             return "account/sign-in";
         }
     }
+    
+    @RequestMapping("/fork")
+	public String adminfork(Model model) {
+		return "fork";
+	}
 }

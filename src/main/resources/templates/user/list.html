@@ -12,7 +12,7 @@
 <div class="container mt-3">
   <div class="d-flex justify-content-between">
     <h3>Users</h3>
-    <a th:href="@{/users/add}" type="button" class="btn btn-dark mb-3">Add User</a>
+    <a th:href="@{/admin/users/add}" type="button" class="btn btn-dark mb-3">Add User</a>
   </div>
   <table class="table table-bordered table-striped">
     <thead>
@@ -31,10 +31,10 @@
       <td th:text="${user.email}"></td>
       <td th:text="${user.isAdmin()} ? 'Admin' : 'Customer'"></td>
       <td>
-        <a type="button" class="btn btn-secondary" th:href="@{/users/edit/{id}(id=${user.id})}">
+        <a type="button" class="btn btn-secondary" th:href="@{/admin/users/edit/{id}(id=${user.id})}">
           <i class="fas fa-edit"></i>
         </a>
-        <a type="button" class="btn btn-danger" th:href="@{/users/delete/{id}(id=${user.id})}">
+        <a type="button" class="btn btn-danger" th:href="@{/admin/users/delete/{id}(id=${user.id})}">
           <i class="far fa-trash-alt"></i>
         </a>
       </td>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="@{/styles/fork.css}" />
+    <link th:href="@{/styles/fork.css}" rel="stylesheet" type="text/css" />
     <title>Nocturne Admin Dashboard</title>
   </head>
   <body>
     <div class="container">
       <div class="box">
         <h2>Nocturne User Home</h2>
-        <a href="@{/home}"><button class="bordered-button">Go</button></a>
+        <a th:href="@{/home}"><button class="bordered-button">Go</button></a>
       </div>
       <div class="box">
         <h2>Admin Dashboard</h2>
-        <a href="@{/product/list}"><button class="bordered-button">Go</button></a>
+        <a th:href="@{/admin/products}"><button class="bordered-button">Go</button></a>
       </div>
     </div>
   </body>

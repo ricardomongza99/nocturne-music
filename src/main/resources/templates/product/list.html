@@ -12,7 +12,7 @@
 <div class="container mt-3">
   <div class="d-flex justify-content-between">
     <h3>Products</h3>
-    <a th:href="@{/products/add}" type="button" class="btn btn-dark mb-3">Add Product</a>
+    <a th:href="@{/admin/products/add}" type="button" class="btn btn-dark mb-3">Add Product</a>
   </div>
   <table class="table table-bordered table-striped">
     <thead>
@@ -35,10 +35,10 @@
       <td th:text="${product.imageUrl}"></td>
       <td th:text="${product.category.name}"></td>
       <td>
-        <a type="button" class="btn btn-secondary" th:href="@{/products/edit/{id}(id=${product.id})}">
+        <a type="button" class="btn btn-secondary" th:href="@{/admin/products/edit/{id}(id=${product.id})}">
           <i class="fas fa-edit"></i>
         </a>
-        <a type="button" class="btn btn-danger" th:href="@{/products/delete/{id}(id=${product.id})}">
+        <a type="button" class="btn btn-danger" th:href="@{/admin/products/delete/{id}(id=${product.id})}">
           <i class="far fa-trash-alt"></i>
         </a>
       </td>
