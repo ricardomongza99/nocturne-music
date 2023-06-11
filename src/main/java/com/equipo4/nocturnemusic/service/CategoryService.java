@@ -21,6 +21,10 @@ public class CategoryService {
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
+    
+    public Optional<Category> findByName(String category) {
+		return categoryRepository.findByName(category);
+	}
 
     public Category save(Category category) {
         return categoryRepository.save(category);

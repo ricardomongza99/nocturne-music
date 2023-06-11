@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title th:text="'Nocturne | ' + ${title}"></title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div th:insert="~{fragments/navbar.html :: navbar(${categories})}"></div>
+
+    <div class="product-list">
+      <h2 th:text="${title}" style="padding-top: 20px;"></h2>
+      <div class="product-item" th:each="item : ${products}">
+        <!-- div class="product-item-image">
+          <img th:src="@{${item.getImageUrl()??}}" alt="" />
+        < /div -->
+        <div class="item-details">
+          <h4 class="item-title" th:text="${item.getName()}"></h4>
+          <p class="item-desc" th:text="${item.getDescription()}"></p>
+          <div class="item-price"><span th:text="'$' + ${item.getPrice()} + ' MXN'"></span></div>
+          <form th:action="@{/addToCart}" method="POST">
+            <input type="hidden" name="id" th:value="${item.getId()}" />
+            <input type="hidden" name="qty" value="1" min="1" />
+            <button class="add-btn" type="submit">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

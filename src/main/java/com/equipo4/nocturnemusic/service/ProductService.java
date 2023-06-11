@@ -1,5 +1,6 @@
 package com.equipo4.nocturnemusic.service;
 
+import com.equipo4.nocturnemusic.model.Category;
 import com.equipo4.nocturnemusic.model.Product;
 import com.equipo4.nocturnemusic.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ public class ProductService {
     public List<Product> findAll() {
         return productRepository.findAll();
     }
+    
+    public List<Product> findByCategory(Category category) {
+		return productRepository.findByCategory(category);
+	}
 
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
