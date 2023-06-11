@@ -65,7 +65,7 @@ public class ShoppingCart {
     public int findItem(Product product) {
     	for (Map.Entry<Product, Integer> item : items.entrySet()) {
             Product i = item.getKey();
-            if (i.equals(product)) {
+            if (i.getId().equals(product.getId())) {
                 return item.getValue();
             }
         }
@@ -73,10 +73,15 @@ public class ShoppingCart {
     }
     
     public void updateItem(Product product, int quantity) {
-        if (quantity > 0) {
-            items.put(product, quantity);
-        } else {
-            items.remove(product);
+    	for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            if (entry.getKey().getId().equals(product.getId())) {
+            	if (quantity > 0) {
+                    items.put(entry.getKey(), quantity);
+                } else {
+                    items.remove(entry.getKey());
+                }
+            	return;
+            }
         }
     }
 

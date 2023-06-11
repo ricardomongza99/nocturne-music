@@ -67,3 +67,18 @@ th {
 .product-list {
     margin-left: 100px;
 }
+
+.rmv-btn {
+    background-color: dimgray;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Amiko', sans-serif;
+    margin-left: 50px;
+    padding: 10px 10px 8px;
+}
+
+    .rmv-btn:hover {
+        background-color: #B03043;
+        cursor: pointer;
+    }

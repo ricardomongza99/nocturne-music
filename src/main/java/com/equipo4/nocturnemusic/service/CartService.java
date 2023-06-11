@@ -46,7 +46,7 @@ public class CartService {
             Map.Entry<Product, Integer> entry = iterator.next();
             Product i = entry.getKey();
             Integer qty = entry.getValue();
-            Element j = new Element(i.getName(), qty, i.getPrice());
+            Element j = new Element(i.getId(), i.getName(), qty, i.getPrice());
 
             ticket.add(j);
         }
@@ -56,12 +56,14 @@ public class CartService {
 }
 
 class Element {
+	public final Long pid;
 	public final String name;
 	public final int amount;
 	public final BigDecimal price;
 	public final BigDecimal uprice;
 	
-	public Element(String name, int amount, BigDecimal unitprice) {
+	public Element(Long pid, String name, int amount, BigDecimal unitprice) {
+		this.pid = pid;
 		this.name = name;
 		this.amount = amount;
 		this.uprice = unitprice;

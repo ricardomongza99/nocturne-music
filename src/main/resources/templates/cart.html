@@ -28,6 +28,12 @@
             <td th:text="'$' + ${item.uprice}"></td>
             <td th:text="${item.amount}"></td>
             <td class="last-col-td" th:text="'$' + ${item.price}"></td>
+            <td>
+              <form th:action="@{/removeFromCart}" method="POST">
+                <input type="hidden" name="id" th:value="${item.pid}" />
+                <button class="rmv-btn" type="submit">-</button>
+              </form>
+            </td>
           </tr>
           <tr>
             <td class="first-col-td" style="font-weight:600;">Total:</td>

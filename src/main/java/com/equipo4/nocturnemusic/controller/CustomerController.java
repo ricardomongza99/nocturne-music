@@ -52,7 +52,11 @@ public class CustomerController {
 	
 	@RequestMapping("/cart")
 	public String checkout(Model model, HttpSession session) {
-		this.cartService = (CartService)session.getAttribute("cart");
+		var cartService = (CartService)session.getAttribute("cart");
+		if (cartService == null) {
+			User user = (User)session.getAttribute("active_user");
+			this.cartService.newCart(user);
+		} else this.cartService = cartService;
 		model.addAttribute("cart", this.cartService.ticket());
 		model.addAttribute("categories", catService.findAll());
 		model.addAttribute("grandTotal", this.cartService.grandTotal());
@@ -74,6 +78,21 @@ public class CustomerController {
 		
 		String location = request.getHeader("Referer");
 	    return "redirect:" + location;
+	}
+	
+	@PostMapping("/removeFromCart")
+	public String removeFromCart(Model model, HttpSession session,
+								 @RequestParam("id") Long iid) {
+		var cartService = (CartService)session.getAttribute("cart");
+		if (cartService == null) {
+			User user = (User)session.getAttribute("active_user");
+			this.cartService.newCart(user);
+		} else this.cartService = cartService;
+		Product item = prodService.findById(iid)
+		        .orElseThrow(() -> new RuntimeException("Product not found with ID: " + iid));
+		this.cartService.removeFromCart(item);
+		session.setAttribute("cart", this.cartService);
+		return "redirect:/cart";
 	}
 	
 	@RequestMapping("/logout")
