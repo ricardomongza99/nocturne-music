@@ -3,6 +3,7 @@ package com.equipo4.nocturnemusic.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ShoppingCart {
@@ -19,6 +20,10 @@ public class ShoppingCart {
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
     private Map<Product, Integer> items;
+    
+    public ShoppingCart() {
+    	this.items = new HashMap<>();
+    }
 
     // Getters and Setters
 
@@ -47,10 +52,26 @@ public class ShoppingCart {
     }
 
     public void addItem(Product product) {
-        int quantity = items.getOrDefault(product, 0);
-        items.put(product, quantity + 1);
+    	for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            if (entry.getKey().getId().equals(product.getId())) {
+                int quantity = entry.getValue();
+                items.put(entry.getKey(), quantity + 1);
+                return;
+            }
+        }
+        items.put(product, 1);
     }
 
+    public int findItem(Product product) {
+    	for (Map.Entry<Product, Integer> item : items.entrySet()) {
+            Product i = item.getKey();
+            if (i.equals(product)) {
+                return item.getValue();
+            }
+        }
+        return 0;
+    }
+    
     public void updateItem(Product product, int quantity) {
         if (quantity > 0) {
             items.put(product, quantity);

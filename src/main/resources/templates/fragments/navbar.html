@@ -3,7 +3,7 @@
   <label for="hamburger" class="hamburger">
     <i></i>
     <text>
-      <close>cerrar</close>
+      <close>close</close>
       <open>menu</open>
     </text>
   </label>
@@ -29,12 +29,12 @@
         <a th:href="@{/cart}">
           <img class="icon" th:src="@{/images/cart_icon.png}" src="../static/images/cart_icon.png" />
           Cart&nbsp;&nbsp;&nbsp;&nbsp;
-          <div th:if="${order != null}"><div class="tag" th:text="${order.cartSize()}"></div></div>
-          <div th:unless="${order != null}"><div class="tag">0</div></div>
+          <!-- div th:if="${order != null}"><div class="tag" th:text="${order.cartSize()}"></div></!--div>
+          <div th:unless="${order != null}"><div class="tag">0</div></div -->
         </a>
       </li>
       <li>
-        <a th:href="@{/}">
+        <a th:href="@{/logout}">
           <img class="icon" th:src="@{/images/logout_icon.png}" src="../static/images/logout_icon.png" />
           Logout
         </a>

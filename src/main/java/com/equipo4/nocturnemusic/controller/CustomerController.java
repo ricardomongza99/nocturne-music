@@ -2,12 +2,16 @@ package com.equipo4.nocturnemusic.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.equipo4.nocturnemusic.service.*;
@@ -15,15 +19,20 @@ import com.equipo4.nocturnemusic.model.*;
 
 @Controller
 public class CustomerController {
+	private final ProductService prodService;
+	private final CategoryService catService;
+	private CartService cartService;
+	
 	@Autowired
-	private ProductService prodService;
-	@Autowired
-	private CategoryService catService;
+	public CustomerController(ProductService ps, CategoryService ks) {
+		this.prodService = ps;
+		this.cartService = new CartService();
+		this.catService = ks;
+	}
 	
 	@RequestMapping("/products/{category}")
 	public String getProducts(@PathVariable("category") String category, Model model) {
-		List<Category> categories = catService.findAll();
-		model.addAttribute("categories", categories);
+		model.addAttribute("categories", catService.findAll());
 		
 		if (category.equals("all")) {
 			List<Product> products = prodService.findAll();
@@ -39,5 +48,37 @@ public class CustomerController {
 		}
 		
 		return "products";
+	}
+	
+	@RequestMapping("/cart")
+	public String checkout(Model model, HttpSession session) {
+		this.cartService = (CartService)session.getAttribute("cart");
+		model.addAttribute("cart", this.cartService.ticket());
+		model.addAttribute("categories", catService.findAll());
+		model.addAttribute("grandTotal", this.cartService.grandTotal());
+		return "cart";
+	}
+	
+	@PostMapping("/addToCart")
+	public String addToCart(Model model, HttpSession session, HttpServletRequest request,
+							@RequestParam("id") Long iid) {
+		var cartService = (CartService)session.getAttribute("cart");
+		if (cartService == null) {
+			User user = (User)session.getAttribute("active_user");
+			this.cartService.newCart(user);
+		} else this.cartService = cartService;
+		Product item = prodService.findById(iid)
+		        .orElseThrow(() -> new RuntimeException("Product not found with ID: " + iid));
+		this.cartService.addToCart(item);
+		session.setAttribute("cart", this.cartService);
+		
+		String location = request.getHeader("Referer");
+	    return "redirect:" + location;
+	}
+	
+	@RequestMapping("/logout")
+	public String cleanCart(Model model, HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 }

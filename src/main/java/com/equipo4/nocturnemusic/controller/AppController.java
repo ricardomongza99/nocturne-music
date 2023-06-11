@@ -27,9 +27,7 @@ public class AppController {
     }
 
     @RequestMapping("/home")
-	public String home(Model model, HttpSession session) {
-    	String user = (String)session.getAttribute("active_user");
-    	model.addAttribute("au_name", user);
+	public String home(Model model) {
     	model.addAttribute("categories", catService.findAll());
 		return "home";
 	}
@@ -47,7 +45,7 @@ public class AppController {
     	User user = userService.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
-        	session.setAttribute("active_user", user.getName());
+        	session.setAttribute("active_user", user);
             if (user.isAdmin()) {
                 return "redirect:/fork";
             } else {
