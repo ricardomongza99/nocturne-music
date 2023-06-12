@@ -74,11 +74,26 @@ th {
     border-radius: 12px;
     color: white;
     font-family: 'Amiko', sans-serif;
+    font-size: 30px;
     margin-left: 50px;
-    padding: 10px 10px 8px;
+    padding: 5px 10px 3px;
 }
 
     .rmv-btn:hover {
         background-color: #B03043;
+        cursor: pointer;
+    }
+
+.simple-button {
+    background-color: #B09F5C;
+    border-width: 0;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Amiko', sans-serif;
+    padding: 10px;
+}
+
+    .simple-button:hover {
+        background-color: #CABF91;
         cursor: pointer;
     }

@@ -5,12 +5,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.equipo4.nocturnemusic.model.*;
+import com.equipo4.nocturnemusic.repository.CartRepository;
 
 @Service
 public class CartService {
+	
+	@Autowired
+	private CartRepository cartRepository;
+	
 	private ShoppingCart cart;
 	
 	public void newCart(User user) {
@@ -20,6 +27,12 @@ public class CartService {
 	
 	public void addToCart(Product item) {
 		this.cart.addItem(item);
+	}
+	
+	public void saveCart() {
+		if (this.cart != null) {
+			this.cartRepository.save(this.cart);
+		}
 	}
 	
 	public void removeFromCart(Product item) {

@@ -24,9 +24,9 @@ public class CustomerController {
 	private CartService cartService;
 	
 	@Autowired
-	public CustomerController(ProductService ps, CategoryService ks) {
+	public CustomerController(ProductService ps, CartService cs, CategoryService ks) {
 		this.prodService = ps;
-		this.cartService = new CartService();
+		this.cartService = cs;
 		this.catService = ks;
 	}
 	
@@ -93,6 +93,20 @@ public class CustomerController {
 		this.cartService.removeFromCart(item);
 		session.setAttribute("cart", this.cartService);
 		return "redirect:/cart";
+	}
+	
+	@RequestMapping("/thanks")
+	public String end(Model model, HttpSession session) {
+		User user = (User)session.getAttribute("active_user");
+		var cartService = (CartService)session.getAttribute("cart");
+		if (cartService == null) {
+			return "home";
+		} else this.cartService = cartService;
+		this.cartService.saveCart();
+		model.addAttribute("user", user.getName());
+		model.addAttribute("categories", catService.findAll());
+		this.cartService.newCart(user);
+		return "thanks";
 	}
 	
 	@RequestMapping("/logout")

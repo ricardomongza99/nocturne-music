@@ -5,7 +5,7 @@
     <link th:href="@{/styles/navbar.css}" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Productos | Nocturne Music</title>
+    <title>Your Cart | Nocturne Music</title>
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -40,6 +40,11 @@
             <td></td>
             <td></td>
             <td class="last-col-td" style="font-weight:600;" th:text="'$' + ${grandTotal}"></td>
+          </tr>
+          <tr>
+            <td>
+              <a th:href="@{/thanks}"><button class="simple-button" type="submit">Complete Purchase</button></a>
+            </td>
           </tr>
         </tbody>
       </table>

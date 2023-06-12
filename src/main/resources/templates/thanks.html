@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link th:href="@{/styles/main.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Thanks! | Nocturne Music</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div th:insert="~{fragments/navbar.html :: navbar(${categories})}"></div>
+
+    <div class="product-list">
+      <h1 th:text="'Thanks, ' + ${user} + '!'"></h1>
+      <p>Your products are on the way!</p><br />
+      <a th:href="@{/home}"><button class="simple-button" type="submit">Go Back</button></a>
+    </div>
+  </body>
+</html>
