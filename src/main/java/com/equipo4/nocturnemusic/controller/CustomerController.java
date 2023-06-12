@@ -102,7 +102,6 @@ public class CustomerController {
 		if (cartService == null) {
 			return "home";
 		} else this.cartService = cartService;
-		this.cartService.saveCart();
 		model.addAttribute("user", user.getName());
 		model.addAttribute("categories", catService.findAll());
 		this.cartService.newCart(user);
